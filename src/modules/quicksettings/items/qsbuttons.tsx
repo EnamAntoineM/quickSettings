@@ -156,13 +156,8 @@ function InternetButton() {
 
    const subtitle = createComputed(() => {
       connectivity();
-      if (primary() === AstalNetwork.Primary.WIRED) {
-         if (wired.internet === AstalNetwork.Internet.CONNECTED) {
-            return "Wired";
-         }
-      }
-      if (primary() === AstalNetwork.Primary.WIFI) {
-         return wifi.ssid;
+      if (wifi !== null) {
+         return enabled() ? "WiFi On" : "WiFi Off";
       }
       return "";
    });
@@ -170,7 +165,7 @@ function InternetButton() {
    return (
       <QSButton
          icon={getNetworkIconBinding()}
-         label={"Internet"}
+         label={"WiFi"}
          subtitle={subtitle((text) => (text !== "" ? text : "None"))}
          onClicked={() => {
             if (
@@ -236,16 +231,16 @@ function ScreenRecordButton() {
 function BluetoothButton() {
    const powered = createBinding(bluetooth, "isPowered");
    const connected = createBinding(bluetooth, "isConnected");
-   const devices = createBinding(bluetooth, "devices");
-   const device = createComputed(
-      () => (connected(), devices().find((device) => device.connected)),
-   );
+
+   const subtitle = createComputed(() => {
+      return powered() ? "Bluetooth On" : "Bluetooth Off";
+   });
 
    return (
       <QSButton
          icon={icons.bluetooth}
          label={"Bluetooth"}
-         subtitle={device((d) => (d ? d.alias : "None"))}
+         subtitle={subtitle}
          arrow={"separate"}
          onClicked={() => bluetooth.toggle()}
          onArrowClicked={() => qs_page_set("bluetooth")}

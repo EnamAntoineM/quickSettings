@@ -30,9 +30,8 @@ window#quicksettings {
    }
 
    .qs-main-page {
-      .header {
-         min-height: 50px;
-
+      .header-top,
+      .header-center {
          .qs-header-button {
             background: rgba($bg1, $window-opacity);
             outline: none;
@@ -51,10 +50,47 @@ window#quicksettings {
             &:hover {
                background: rgba($bg2, $window-opacity);
             }
+
+            &.datetime {
+               padding: 12px 20px;
+               min-width: 0;
+
+               .time {
+                  font-size: $font-size + 6pt;
+                  font-weight: 600;
+                  letter-spacing: 0.5px;
+               }
+
+               .date {
+                  font-size: $font-size - 1pt;
+                  opacity: 0.8;
+                  font-weight: 400;
+               }
+            }
          }
 
          .battery-button {
             padding: 0 10px;
+         }
+      }
+
+      .notifications-bar {
+         background: rgba($bg1, $window-opacity);
+         outline: none;
+         border-radius: $widget-radius;
+         color: $fg0;
+         font-weight: normal;
+         padding: 10px;
+         min-height: 40px;
+
+         &:focus {
+            transition: 0s;
+            outline-offset: -$window-outline-width;
+            outline: $window-outline-width solid $window-outline-color;
+         }
+
+         &:hover {
+            background: rgba($bg2, $window-opacity);
          }
       }
 
@@ -64,7 +100,7 @@ window#quicksettings {
          color: $fg0;
 
          outline: none;
-         min-height: 60px;
+         min-height: 45px;
 
          .qs-button-box,
          .qs-button-box-arrow,
