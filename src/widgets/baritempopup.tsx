@@ -39,6 +39,11 @@ export function BarItemPopup({
         : "end";
 
    function halign() {
+      // always align calendar popups to the right edge instead of centering
+      if (module === "clock") {
+         return Gtk.Align.END;
+      }
+
       if (isVertical) {
          switch (bar_pos) {
             case "right":

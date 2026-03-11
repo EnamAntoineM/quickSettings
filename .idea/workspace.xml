@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28cb8682-1b9f-42bf-87cf-531cd20901a3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/options.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/quicksettings/items/qsbuttons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/quicksettings/items/qsbuttons.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/quicksettings/pages/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/quicksettings/pages/main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/quicksettings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/quicksettings.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/windows.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/baritempopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/baritempopup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +57,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
@@ -75,7 +78,7 @@
     <option name="spentUsd" value="0.0036435" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="9" />
+    <option name="suspendCountdown" value="8" />
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -93,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1773219492512</updated>
       <workItem from="1773219494086" duration="171000" />
-      <workItem from="1773219681346" duration="2580000" />
+      <workItem from="1773219681346" duration="5766000" />
     </task>
     <servers />
   </component>

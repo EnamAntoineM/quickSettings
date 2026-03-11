@@ -128,7 +128,7 @@ export const config = mkOptions(configFile, {
       },
    },
    quicksettings: {
-      buttons: ["network", "bluetooth", "notifications", "screenrecord"],
+      buttons: ["network", "bluetooth"],
       sliders: ["volume", "brightness"],
    },
    launcher: {

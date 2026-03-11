@@ -147,8 +147,8 @@ function InternetButton() {
    const active = createComputed(() => {
       connectivity();
       if (
-         primary() === AstalNetwork.Primary.WIRED &&
-         network.wired.internet === AstalNetwork.Internet.CONNECTED
+          primary() === AstalNetwork.Primary.WIRED &&
+          network.wired.internet === AstalNetwork.Internet.CONNECTED
       )
          return true;
       if (wifi !== null) return enabled();
@@ -156,41 +156,46 @@ function InternetButton() {
 
    const subtitle = createComputed(() => {
       connectivity();
-      if (wifi !== null) {
-         return enabled() ? "WiFi On" : "WiFi Off";
+      if (primary() === AstalNetwork.Primary.WIRED) {
+         if (wired.internet === AstalNetwork.Internet.CONNECTED) {
+            return "Wired";
+         }
+      }
+      if (primary() === AstalNetwork.Primary.WIFI) {
+         return wifi.ssid;
       }
       return "";
    });
 
    return (
-      <QSButton
-         icon={getNetworkIconBinding()}
-         label={"WiFi"}
-         subtitle={subtitle((text) => (text !== "" ? text : "None"))}
-         onClicked={() => {
-            if (
-               network.primary === AstalNetwork.Primary.WIFI ||
-               network.primary === AstalNetwork.Primary.UNKNOWN
-            ) {
-               wifi.set_enabled(!wifi.enabled);
-            }
-         }}
-         onArrowClicked={() => {
-            wifi.scan();
-            qs_page_set("network");
-         }}
-         arrow={network.wifi !== null ? "separate" : "none"}
-         ArrowClasses={active((p) => {
-            const classes = ["arrow"];
-            p && classes.push("active");
-            return classes;
-         })}
-         ButtonClasses={active((p) => {
-            const classes = ["qs-button-box-arrow"];
-            p && classes.push("active");
-            return classes;
-         })}
-      />
+       <QSButton
+           icon={getNetworkIconBinding()}
+           label={"Internet"}
+           subtitle={subtitle((text) => (text !== "" ? text : "None"))}
+           onClicked={() => {
+              if (
+                  network.primary === AstalNetwork.Primary.WIFI ||
+                  network.primary === AstalNetwork.Primary.UNKNOWN
+              ) {
+                 wifi.set_enabled(!wifi.enabled);
+              }
+           }}
+           onArrowClicked={() => {
+              wifi.scan();
+              qs_page_set("network");
+           }}
+           arrow={network.wifi !== null ? "separate" : "none"}
+           ArrowClasses={active((p) => {
+              const classes = ["arrow"];
+              p && classes.push("active");
+              return classes;
+           })}
+           ButtonClasses={active((p) => {
+              const classes = ["qs-button-box-arrow"];
+              p && classes.push("active");
+              return classes;
+           })}
+       />
    );
 }
 
@@ -231,30 +236,30 @@ function ScreenRecordButton() {
 function BluetoothButton() {
    const powered = createBinding(bluetooth, "isPowered");
    const connected = createBinding(bluetooth, "isConnected");
-
-   const subtitle = createComputed(() => {
-      return powered() ? "Bluetooth On" : "Bluetooth Off";
-   });
+   const devices = createBinding(bluetooth, "devices");
+   const device = createComputed(
+       () => (connected(), devices().find((device) => device.connected)),
+   );
 
    return (
-      <QSButton
-         icon={icons.bluetooth}
-         label={"Bluetooth"}
-         subtitle={subtitle}
-         arrow={"separate"}
-         onClicked={() => bluetooth.toggle()}
-         onArrowClicked={() => qs_page_set("bluetooth")}
-         ArrowClasses={powered((p) => {
-            const classes = ["arrow"];
-            p && classes.push("active");
-            return classes;
-         })}
-         ButtonClasses={powered((p) => {
-            const classes = ["qs-button-box-arrow"];
-            p && classes.push("active");
-            return classes;
-         })}
-      />
+       <QSButton
+           icon={icons.bluetooth}
+           label={"Bluetooth"}
+           subtitle={device((d) => (d ? d.alias : "None"))}
+           arrow={"separate"}
+           onClicked={() => bluetooth.toggle()}
+           onArrowClicked={() => qs_page_set("bluetooth")}
+           ArrowClasses={powered((p) => {
+              const classes = ["arrow"];
+              p && classes.push("active");
+              return classes;
+           })}
+           ButtonClasses={powered((p) => {
+              const classes = ["qs-button-box-arrow"];
+              p && classes.push("active");
+              return classes;
+           })}
+       />
    );
 }
 
@@ -347,7 +352,7 @@ export function QSButtons() {
          naturalLineLength={440 - theme.window.padding * 2}
       >
          {buttons}
-         {buttons.length % 2 !== 0 && <box widthRequest={200} />}
+         {buttons.length % 2 !== 0 && <box widthRequest={400} />}
       </Adw.WrapBox>
    );
 }

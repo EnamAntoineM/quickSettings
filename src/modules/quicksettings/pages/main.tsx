@@ -11,6 +11,7 @@ import { createPoll } from "ags/time";
 import { config, theme } from "@/options";
 import { windows_names } from "@/windows";
 import GLib from "gi://GLib";
+import {NotificationsListModule} from "@/src/modules/notifications/notificationslist";
 const battery = AstalBattery.get_default();
 
 function Power() {
@@ -65,8 +66,8 @@ function DateTime() {
          focusOnClick={false}
       >
          <box
-            orientation={Gtk.Orientation.VERTICAL}
-            spacing={4}
+            orientation={Gtk.Orientation.HORIZONTAL}
+            spacing={theme.spacing}
             valign={Gtk.Align.CENTER}
          >
             <label class={"time"} label={time} />
@@ -91,36 +92,6 @@ export function Header() {
    );
 }
 
-function NotificationsBar() {
-   const notifd = AstalNotifd.get_default();
-   const notifications = createBinding(notifd, "notifications");
-   const dnd = createBinding(notifd, "dontDisturb");
-
-   return (
-      <button
-         class={"notifications-bar"}
-         onClicked={() => notifd.set_dont_disturb(!notifd.dontDisturb)}
-         focusOnClick={false}
-      >
-         <box spacing={theme.spacing} halign={Gtk.Align.CENTER}>
-            <image
-               iconName={dnd.as((d) => d ? icons.bell_off : icons.bell)}
-               pixelSize={20}
-            />
-            <label
-               label={notifications.as((n) =>
-                  dnd.get()
-                     ? "Do Not Disturb"
-                     : n.length === 0
-                        ? "No Notifications"
-                        : `${n.length} Notification${n.length > 1 ? 's' : ''}`
-               )}
-            />
-         </box>
-      </button>
-   );
-}
-
 export function MainPage() {
    return (
       <box
@@ -131,9 +102,7 @@ export function MainPage() {
          spacing={theme.spacing}
       >
          <Header />
-         <QSButtons />
          <QSSliders />
-         <NotificationsBar />
       </box>
    );
 }
